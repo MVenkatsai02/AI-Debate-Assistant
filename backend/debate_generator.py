@@ -13,24 +13,65 @@ GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 def generate_debate(topic):
     """
-    Generate structured arguments and rebuttals using Groq AI model.
+    Generate a structured debate with at least 10 arguments for and against.
     """
     if not GROQ_API_KEY:
-        return {"error": "GROQ_API_KEY is missing. Please check your .env file."}
+        return "Error: GROQ_API_KEY is missing. Please check your .env file."
 
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json"
     }
 
+    # Structured prompt for better formatting
+    prompt = f"""
+    Debate Topic: {topic}
+
+    **For the Motion (Supporting Arguments):**
+    1. [Provide strong supporting argument]
+    2. [Provide strong supporting argument]
+    3. [Provide strong supporting argument]
+    4. [Provide strong supporting argument]
+    5. [Provide strong supporting argument]
+    6. [Provide strong supporting argument]
+    7. [Provide strong supporting argument]
+    8. [Provide strong supporting argument]
+    9. [Provide strong supporting argument]
+    10. [Provide strong supporting argument]
+
+    **Against the Motion (Opposing Arguments):**
+    1. [Provide strong opposing argument]
+    2. [Provide strong opposing argument]
+    3. [Provide strong opposing argument]
+    4. [Provide strong opposing argument]
+    5. [Provide strong opposing argument]
+    6. [Provide strong opposing argument]
+    7. [Provide strong opposing argument]
+    8. [Provide strong opposing argument]
+    9. [Provide strong opposing argument]
+    10. [Provide strong opposing argument]
+
+    **Counterarguments & Rebuttals:**
+    - [Provide key rebuttal to one argument]
+    - [Provide key rebuttal to another argument]
+    - [Provide another key rebuttal]
+
+    Conclude with a balanced summary.
+    """
+
     payload = {
-        "model": "mixtral-8x7b-32768",  # Use the correct Groq model
+        "model": "mixtral-8x7b-32768",
         "messages": [
-            {"role": "system", "content": "You are a debate assistant. Generate structured pro and con arguments."},
-            {"role": "user", "content": f"Generate a detailed debate on: {topic}"}
+            {"role": "system", "content": "You are a structured debate assistant. Provide a well-organized debate with at least 10 arguments for and against."},
+            {"role": "user", "content": prompt}
         ]
     }
 
     # Make API request
     response = requests.post(GROQ_API_URL, json=payload, headers=headers)
-    return response.json()  # Return API response
+
+    if response.status_code == 200:
+        result = response.json()
+        return result["choices"][0]["message"]["content"]
+    else:
+        return f"Error: Failed to fetch response. {response.text}"
