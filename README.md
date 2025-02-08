@@ -127,7 +127,7 @@ This project is open-source under the MIT License.
 
 🚀 Built with ❤️ using FastAPI, Streamlit & Groq AI 🚀
 
-👉 https://aidebateassistant.streamlit.app
+
 
 
 
