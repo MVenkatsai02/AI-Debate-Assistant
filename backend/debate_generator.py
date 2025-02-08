@@ -9,7 +9,7 @@ load_dotenv()
 GROQ_API_KEY = os.getenv("Groq_api_key")
 
 # Groq API URL (Chat Completion Endpoint)
-GROQ_API_URL = "https://api.groq.com/v1/chat/completions"
+GROQ_API_URL = "https://api.mixtral.com/v1/chat/completions"
 
 def generate_debate(topic):
     """
