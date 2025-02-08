@@ -1,0 +1,21 @@
+# Ignore Python compiled files  
+__pycache__/  
+*.py[cod]  
+
+# Ignore virtual environment  
+venv/  
+.env  
+
+# Ignore cache and logs  
+*.log  
+*.cache  
+
+# Ignore OS-specific files  
+.DS_Store  
+Thumbs.db  
+
+# Ignore Streamlit deployment files  
+.streamlit/secrets.toml  
+
+# Ignore VS Code settings (if using VS Code)  
+.vscode/  
