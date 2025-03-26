@@ -60,7 +60,7 @@ def generate_debate(topic):
     """
 
     payload = {
-        "model": "mixtral-8x7b-32768",
+        "model": "gemma2-9b-it",
         "messages": [
             {"role": "system", "content": "You are a structured debate assistant. Provide a well-organized debate with at least 10 arguments for and against."},
             {"role": "user", "content": prompt}
